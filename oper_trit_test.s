@@ -4,7 +4,7 @@
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
 # Create date: 03.03.2024
-# Edit date:   03.03.2023
+# Edit date:   05.03.2023
 #
 # Author:      Vladimir V.
 # E-mail:      askfind@ya.ru
@@ -358,4 +358,58 @@ sum_half_t_ts9:
         logs(sum_half_t_ts9)
         sum_half_t(1,1)
 	put
+.end_macro
+
+
+# ----------------------------------------------------
+# SUM_t tests(...)
+#
+
+.macro sum_t_tests
+
+.data
+sum_t_tests:
+.string	"SUM_t_tests(...) :\n"        
+.text   
+        logs(sum_t_tests)
+
+.data
+sum_t_ts1:
+.string	"sum_t(-1,-1,-1)->"
+.text
+        logs(sum_t_ts1)
+        sum_t(-1,-1,-1)
+        put
+        mv a0,a1 
+        put
+
+.data
+sum_t_ts2:
+.string	"sum_t(-1,-1,0)->"
+.text
+        logs(sum_t_ts2)
+        sum_t(-1,-1,0)
+        put
+        mv a0,a1 
+        put
+
+.data
+sum_t_ts26:
+.string	"sum_t(1,1,0)->"
+.text
+        logs(sum_t_ts26)
+        sum_t(1,1,0)
+        put
+        mv a0,a1 
+        put
+.data
+sum_t_ts27:
+.string	"sum_t(1,1,1)->"
+.text
+        logs(sum_t_ts27)
+        sum_t(1,1,1)
+        put
+        mv a0,a1 
+        put
+
 .end_macro

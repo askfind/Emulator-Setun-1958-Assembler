@@ -9,7 +9,7 @@ A virtual machine of ternary computer Setun, also known as "Small Automatic Digi
 
 - Дата создания:            02.03.2024
 - Дата редактирования:      05.03.2024
-- Версия:                   0.06
+- Версия:                   0.07
 - Автор:                    Vladimir V.
 - E-mail:                   askfind@ya.ru
 
@@ -100,6 +100,20 @@ OR_t tests(...) :
  sum_half_t(1,-1)->0
  sum_half_t(1,0)->1
  sum_half_t(1,1)->-1
+```
+
+### 3.6. Троичная операция SUM_t полный троичный сумматор для тритов
+
+```
+SUM_t_tests(...) :
+ sum_t(-1,-1,-1)->0
+-1
+ sum_t(-1,-1,0)->0
+0
+ sum_t(1,1,0)->-1
+1
+ sum_t(1,1,1)->0
+1
 ```
 
 # Ссылки
