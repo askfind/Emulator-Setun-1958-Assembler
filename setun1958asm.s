@@ -6,7 +6,7 @@
 # Create date: 01.03.2024
 # Edit date:   05.03.2023
 #
-# Version:     0.05
+# Version:     0.06
 #
 # Author:      Vladimir V.
 # E-mail:      askfind@ya.ru
