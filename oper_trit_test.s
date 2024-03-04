@@ -276,7 +276,7 @@ not_t_ts2:
         put
 .data
 not_t_ts3:
-.string	"not_t(-1)->"        
+.string	"not_t(1)->"
 .text        
         logs(not_t_ts3)
         not_t(1)

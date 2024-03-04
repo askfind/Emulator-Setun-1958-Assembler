@@ -84,7 +84,7 @@ OR_t tests(...) :
  NOT_t tests(...) :
  not_t(-1)->1
  not_t(0)->0
- not_t(-1)->-1
+ not_t(1)->-1
 ```
 
 # Ссылки
