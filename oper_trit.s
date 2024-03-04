@@ -4,7 +4,7 @@
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
 # Create date: 03.03.2024
-# Edit date:   03.03.2023
+# Edit date:   05.03.2023
 #
 #
 # Author:      Vladimir V.
@@ -169,8 +169,16 @@ tab_7_9:.byte  1
 
 #  - [ ] исправить вывод в 9-ном виде.
 # Операция троичное NOT
-.macro not_t ($a)	
-	nop
+.macro not_t ($a)
+	li a0,$a	
+	bgtz a0, m_m	# +1 -> -1 
+	bltz a0, m_p	# -1 -> +1 
+	mv a0,zero	#  0 ->  0
+	j m_end
+m_m:	li a0,-1
+	j m_end
+m_p:	li a0, 1
+m_end:	
 .end_macro
 
 

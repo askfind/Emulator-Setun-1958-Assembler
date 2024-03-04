@@ -4,7 +4,7 @@
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
 # Create date: 03.03.2024
-# Edit date:   03.03.2023
+# Edit date:   05.03.2023
 #
 # Author:      Vladimir V.
 # E-mail:      askfind@ya.ru
@@ -246,4 +246,39 @@ xor_t_ts9:
         xor_t(1,1)
 	put
 
+.end_macro
+
+# ----------------------------------------------------
+# NOT_t tests(...)
+#
+
+.macro not_t_test
+
+.data
+not_t_tests:
+.string	"NOT_t tests(...) :\n"        
+.text   
+        logs(not_t_tests)
+
+.data
+not_t_ts1:
+.string	"not_t(-1)->"
+.text
+        logs(not_t_ts1)
+        not_t(-1)
+        put
+.data
+not_t_ts2:
+.string	"not_t(0)->"        
+.text
+        logs(not_t_ts2)
+        not_t(0)
+        put
+.data
+not_t_ts3:
+.string	"not_t(-1)->"        
+.text        
+        logs(not_t_ts3)
+        not_t(1)
+        put
 .end_macro
