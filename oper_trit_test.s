@@ -4,7 +4,7 @@
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
 # Create date: 03.03.2024
-# Edit date:   05.03.2023
+# Edit date:   03.03.2023
 #
 # Author:      Vladimir V.
 # E-mail:      askfind@ya.ru
@@ -276,9 +276,86 @@ not_t_ts2:
         put
 .data
 not_t_ts3:
-.string	"not_t(1)->"
+.string	"not_t(1)->"        
 .text        
         logs(not_t_ts3)
         not_t(1)
         put
+.end_macro
+
+# ----------------------------------------------------
+# SUM_HALF_t tests(...)
+#
+
+.macro sum_half_t_test
+
+.data
+sum_half_t_tests:
+.string	"SUM_HALF_t tests(...) :\n"        
+.text   
+        logs(sum_half_t_tests)
+
+.data
+sum_half_t_ts1:
+.string	"sum_half_t(-1,-1)->"
+.text
+        logs(sum_half_t_ts1)
+        sum_half_t(-1,-1)
+        put
+.data
+sum_half_t_ts2:
+.string	"sum_half_t(-1,0)->"        
+.text
+        logs(sum_half_t_ts2)
+        sum_half_t(-1,0)
+        put
+.data
+sum_half_t_ts3:
+.string	"sum_half_t(-1,1)->"        
+.text        
+        logs(sum_half_t_ts3)
+        sum_half_t(-1,1)
+        put
+.data
+sum_half_t_ts4:
+.string	"sum_half_t(0,-1)->"        
+.text        
+        logs(sum_half_t_ts4)
+        sum_half_t(0,-1)
+	put
+.data
+sum_half_t_ts5:
+.string	"sum_half_t(0,0)->"        
+.text       
+        logs(sum_half_t_ts5)
+        sum_half_t(0,0)
+	put
+.data
+sum_half_t_ts6:
+.string	"sum_half_t(0,1)->"        
+.text
+        logs(sum_half_t_ts6)
+        sum_half_t(0,1)
+	put
+.data
+sum_half_t_ts7:
+.string	"sum_half_t(1,-1)->"        
+.text
+        logs(sum_half_t_ts7)
+        sum_half_t(1,-1)
+	put
+.data
+sum_half_t_ts8:
+.string	"sum_half_t(1,0)->"        
+.text
+        logs(sum_half_t_ts8)
+        sum_half_t(1,0)
+	put
+.data
+sum_half_t_ts9:
+.string	"sum_half_t(1,1)->"        
+.text
+        logs(sum_half_t_ts9)
+        sum_half_t(1,1)
+	put
 .end_macro

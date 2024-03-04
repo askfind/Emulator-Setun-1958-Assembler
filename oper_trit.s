@@ -113,8 +113,8 @@ tab_8_9:.byte -1
 	mul  a4,a1,a3   # a4 = i*3
 	add  a3,a2,a4   # ind = j + i*3
 	la   a4,tab_8   # a4 = tab_8 
-	add  a4,a4,a3   # ind = tab_6 + inds 
-	lb   a0,0(a4)   # a0 = tab_6[ind]
+	add  a4,a4,a3   # ind = tab_8 + inds 
+	lb   a0,0(a4)   # a0 = tab_8[ind]
 .end_macro
 
 # Таб.7 Троичное или
@@ -152,9 +152,9 @@ tab_7_9:.byte  1
 	li   a3,3	# a3 = 3	
 	mul  a4,a1,a3   # a4 = i*3
 	add  a3,a2,a4   # ind = j + i*3
-	la   a4,tab_7   # a4 = tab_8 
-	add  a4,a4,a3   # ind = tab_6 + inds 
-	lb   a0,0(a4)   # a0 = tab_6[ind]	
+	la   a4,tab_7   # a4 = tab_7 
+	add  a4,a4,a3   # ind = tab_7 + inds 
+	lb   a0,0(a4)   # a0 = tab_7[ind]	
 .end_macro
 
 # Таб.5 Троичное отрицание
@@ -193,9 +193,31 @@ m_end:
 # |  1  |  0  |  1  |  +-  |
 # .------------------------.
 
+ .data
+ .align 4
+tab_2:
+tab_2_1:.byte  1
+tab_2_2:.byte -1
+tab_2_3:.byte  0
+tab_2_4:.byte -1
+tab_2_5:.byte  0
+tab_2_6:.byte  1
+tab_2_7:.byte  0
+tab_2_8:.byte  1
+tab_2_9:.byte -1
+
 # Полусумматор тритов
 .macro sum_half_t ($a, $b)	
-       nop
+	li a1,$a	# a1 = a
+	li a2,$b 	# a2 = b
+	addi a1,a1,1	# i = a+1 
+	addi a2,a2,1    # j = b+1	
+	li   a3,3	# a3 = 3	
+	mul  a4,a1,a3   # a4 = i*3
+	add  a3,a2,a4   # ind = j + i*3
+	la   a4,tab_2   # a4 = tab_2 
+	add  a4,a4,a3   # ind = tab_2 + inds 
+	lb   a0,0(a4)   # a0 = tab_2[ind]
 .end_macro
 
 
