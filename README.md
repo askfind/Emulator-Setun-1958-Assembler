@@ -8,8 +8,8 @@ A virtual machine of ternary computer Setun, also known as "Small Automatic Digi
 ## 1. История
 
 - Дата создания:            02.03.2024
-- Дата редактирования:      02.03.2024
-- Версия:                   0.01
+- Дата редактирования:      03.03.2024
+- Версия:                   0.02
 - Автор:                    Vladimir V.
 - E-mail:                   askfind@ya.ru
 
@@ -29,6 +29,20 @@ RARS 1.6  Copyright 2003-2019 Pete Sanderson and Kenneth Vollmar
 Ternary small digital computer 'Setun' on RISC-V
 
 Program terminated by calling exit
+```
+# Операция AND для тритов
+
+```
+AND_t tests(...) :
+ and_t(-1,-1)->-1
+ and_t(-1,0)->-1
+ and_t(-1,1)->-1
+ and_t(0,-1)->-1
+ and_t(0,0)->0
+ and_t(0,1)->0
+ and_t(1,-1)->-1
+ and_t(1,0)->-1
+ and_t(1,1)->1
 ```
 
 # Ссылки
