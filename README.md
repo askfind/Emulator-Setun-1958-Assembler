@@ -30,7 +30,10 @@ Ternary small digital computer 'Setun' on RISC-V
 
 Program terminated by calling exit
 ```
-# Операция AND для тритов
+
+## 3. Проичные операции над тритами
+
+### 3.1. Операция AND для тритов
 
 ```
 AND_t tests(...) :
