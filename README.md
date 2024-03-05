@@ -9,7 +9,7 @@ A virtual machine of ternary computer Setun, also known as "Small Automatic Digi
 
 - Дата создания:            02.03.2024
 - Дата редактирования:      05.03.2024
-- Версия:                   0.07
+- Версия:                   0.08
 - Автор:                    Vladimir V.
 - E-mail:                   askfind@ya.ru
 
@@ -90,7 +90,7 @@ OR_t tests(...) :
 ### 3.5. Троичная операция SUM_HALF полусумматор для тритов
 
 ```
- SUM_HALF_t tests(...) :
+SUM_HALF_t tests(...) :
  sum_half_t(-1,-1)->1
  sum_half_t(-1,0)->-1
  sum_half_t(-1,1)->0
@@ -105,15 +105,23 @@ OR_t tests(...) :
 ### 3.6. Троичная операция SUM_t полный троичный сумматор для тритов
 
 ```
-SUM_t_tests(...) :
- sum_t(-1,-1,-1)->0
--1
- sum_t(-1,-1,0)->0
-0
- sum_t(1,1,0)->-1
-1
- sum_t(1,1,1)->0
-1
+ SUM_t_tests(...) :
+ sum_t(-1,-1,-1)->0 -1
+ sum_t(-1,-1,0)->0 0
+ sum_t(1,1,0)->-1 1
+ sum_t(1,1,1)->0 1
+```
+### 3.7. Операции над троичными числами TRS_t
+
+```
+ TRS_t tests(...) :
+ a0=0xAAAA, a1=0xBBBB; clean_trs(a0,a1)->0 0
+ ts1=0x1, ts0=0x1,pos=0; get_trit(ts1,ts0,pos)->1
+ ts1=0x0, ts0=0x1,pos=0; get_trit(ts1,ts0,pos)->-1
+ ts1=0x0, ts0=0x0,pos=0; get_trit(ts1,ts0,pos)->0
+ ts1=0x4, ts0=0x4,pos=2; get_trit(ts1,ts0,pos)->1
+ ts1=0x0, ts0=0x4,pos=2; get_trit(ts1,ts0,pos)->-1
+ ts1=0x0, ts0=0x0,pos=2; get_trit(ts1,ts0,pos)->0
 ```
 
 # Ссылки

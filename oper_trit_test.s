@@ -24,7 +24,7 @@ and_t_tests:
 .string	"AND_t tests(...) :\n"        
 .text   
         logs(and_t_tests)
-
+#
 .data
 and_t_ts1:
 .string	"and_t(-1,-1)->"
@@ -32,6 +32,7 @@ and_t_ts1:
         logs(and_t_ts1)
         and_t(-1,-1)
         put
+#
 .data
 and_t_ts2:
 .string	"and_t(-1,0)->"        
@@ -365,7 +366,7 @@ sum_half_t_ts9:
 # SUM_t tests(...)
 #
 
-.macro sum_t_tests
+.macro sum_t_test
 
 .data
 sum_t_tests:
@@ -379,9 +380,10 @@ sum_t_ts1:
 .text
         logs(sum_t_ts1)
         sum_t(-1,-1,-1)
-        put
+        logi
         mv a0,a1 
-        put
+        logi
+        loglf
 
 .data
 sum_t_ts2:
@@ -389,9 +391,10 @@ sum_t_ts2:
 .text
         logs(sum_t_ts2)
         sum_t(-1,-1,0)
-        put
+        logi
         mv a0,a1 
-        put
+        logi
+        loglf
 
 .data
 sum_t_ts26:
@@ -399,17 +402,18 @@ sum_t_ts26:
 .text
         logs(sum_t_ts26)
         sum_t(1,1,0)
-        put
+        logi
         mv a0,a1 
-        put
+        logi
+        loglf
 .data
 sum_t_ts27:
 .string	"sum_t(1,1,1)->"
 .text
         logs(sum_t_ts27)
         sum_t(1,1,1)
-        put
+        logi
         mv a0,a1 
-        put
-
+        logi
+        loglf
 .end_macro

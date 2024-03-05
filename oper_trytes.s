@@ -45,3 +45,77 @@
 #	uint32_t ts0; /* троичное число NIL */
 # } trs_t;
 #
+
+# --------------------------------------------------------------
+# Троичные числа
+#
+#  TRITS-1  = [t0]       - обозначение позиции тритов в числе
+#  TRITS-32 = [t31...t0] - обозначение позиции тритов в числе
+#
+
+# TODO add
+#  int8_t get_trit(trs_t t, uint8_t pos);
+#  trs_t set_trit(trs_t t, uint8_t pos, int8_t trit);
+#  trs_t slice_trs(trs_t t, int8_t p1, int8_t p2);
+#  void copy_trs(trs_t *src, trs_t *dst);
+#  void clean_trs(trs_t *src);
+
+
+# -----------------------------------------------------------
+#
+# Очистить троичное число 
+#
+# INPUT:        ts1,ts0      
+# OUTPUT:       - 
+# DESTROYED:    - 
+#
+# void clean_trs(trs_t *src);
+#
+.macro clean_trs ($ts1,$ts0)
+    mv $ts1,zero
+    mv $ts0,zero
+.end_macro
+
+# -----------------------------------------------------------
+#
+# Получить целое со знаком трита в позиции троичного числа
+#
+# INPUT:        ts1,ts0,pos      
+# OUTPUT:       r = {-1,0,+1}   
+# DESTROYED:    - 
+#
+# int8_t get_trit(trs_t t, uint8_t pos)
+# {
+#	t.l = min(t.l, SIZE_TRITS_MAX);
+#	pos = min(pos, SIZE_TRITS_MAX);
+#	if ((t.t0 & (1 << pos)) > 0)
+#	{
+#		if ((t.t1 & (1 << pos)) > 0)
+#		{
+#			return 1;
+#		}
+#		else
+#		{
+#			return -1;
+#		}
+#	}
+#	return 0;
+# }
+#
+.macro get_trit ($ts1,$ts0,$pos)
+        mv a1,$ts1  # a1=ts1  
+        mv a0,$ts0  # a0=ts0
+        mv a3,$pos
+        li a4,1
+        sll a4,a4,a3    
+        and a5,a0,a4
+        beqz a5, m_z
+        and a5,a1,a4
+        beqz a5, m_m
+m_p:    li a0,1
+        j m_end
+m_z:    li a0,0
+        j m_end
+m_m:    li a0,-1
+m_end:
+.end_macro
