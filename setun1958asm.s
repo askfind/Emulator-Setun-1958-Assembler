@@ -4,9 +4,9 @@
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
 # Create date: 01.03.2024
-# Edit date:   05.03.2024
+# Edit date:   06.03.2024
 #
-# Version:     0.08
+# Version:     0.09
 #
 # Author:      Vladimir V.
 # E-mail:      askfind@ya.ru

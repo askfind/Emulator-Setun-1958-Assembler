@@ -8,8 +8,8 @@ A virtual machine of ternary computer Setun, also known as "Small Automatic Digi
 ## 1. История
 
 - Дата создания:            02.03.2024
-- Дата редактирования:      05.03.2024
-- Версия:                   0.08
+- Дата редактирования:      06.03.2024
+- Версия:                   0.09
 - Автор:                    Vladimir V.
 - E-mail:                   askfind@ya.ru
 
@@ -122,6 +122,9 @@ SUM_HALF_t tests(...) :
  ts1=0x4, ts0=0x4,pos=2; get_trit(ts1,ts0,pos)->1
  ts1=0x0, ts0=0x4,pos=2; get_trit(ts1,ts0,pos)->-1
  ts1=0x0, ts0=0x0,pos=2; get_trit(ts1,ts0,pos)->0
+ ts1=0x0000, ts0=0x0000, pos=5, val=-1; set_trit(ts1,ts0,pos,val)->32 0
+ ts1=0x0000, ts0=0x0000, pos=5, val=0; set_trit(ts1,ts0,pos,val)->0 0
+ ts1=0x0000, ts0=0x0000, pos=5, val=+1; set_trit(ts1,ts0,pos,val)->32 32
 ```
 
 # Ссылки

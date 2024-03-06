@@ -4,7 +4,7 @@
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
 # Create date: 05.03.2024
-# Edit date:   05.03.2024
+# Edit date:   06.03.2024
 #
 #
 # Author:      Vladimir V.
@@ -46,7 +46,7 @@
 # } trs_t;
 #
 
-# --------------------------------------------------------------
+# -----------------------------------------------------------
 # Троичные числа
 #
 #  TRITS-1  = [t0]       - обозначение позиции тритов в числе
@@ -78,29 +78,13 @@
 
 # -----------------------------------------------------------
 #
-# Получить целое со знаком трита в позиции троичного числа
+# Получить трит из позиции троичного числа
 #
 # INPUT:        ts1,ts0,pos      
 # OUTPUT:       r = {-1,0,+1}   
 # DESTROYED:    - 
 #
 # int8_t get_trit(trs_t t, uint8_t pos)
-# {
-#	t.l = min(t.l, SIZE_TRITS_MAX);
-#	pos = min(pos, SIZE_TRITS_MAX);
-#	if ((t.t0 & (1 << pos)) > 0)
-#	{
-#		if ((t.t1 & (1 << pos)) > 0)
-#		{
-#			return 1;
-#		}
-#		else
-#		{
-#			return -1;
-#		}
-#	}
-#	return 0;
-# }
 #
 .macro get_trit ($ts1,$ts0,$pos)
         mv a1,$ts1  # a1=ts1  
@@ -112,10 +96,42 @@
         beqz a5, m_z
         and a5,a1,a4
         beqz a5, m_m
-m_p:    li a0,1
+m_p:    li a0,1         # if trs[pos] == +1  
         j m_end
-m_z:    li a0,0
+m_z:    li a0,0         # if trs[pos] ==  0   
         j m_end
-m_m:    li a0,-1
+m_m:    li a0,-1        # if trs[pos] == -1  
+m_end:
+.end_macro
+
+# -----------------------------------------------------------
+#
+# Установить трит  в позиции троичного числа
+#
+# INPUT:        ts1,ts0,pos,val      
+# OUTPUT:       ts1,ts0
+# DESTROYED:    - 
+#
+# trs_t set_trit(trs_t t, uint8_t pos, int8_t val);
+#
+.macro set_trit ($ts1,$ts0,$pos,$val)
+        mv a1,$ts1      # a1=ts1  
+        mv a0,$ts0      # a0=ts0
+        mv a2,$pos
+        mv a3,$val        
+        li a4,1
+        sll a4,a4,a2    
+        bgtz  a3, m_p   # if val > 0
+        bltz  a3, m_m   # if val < 0
+        not a4,a4       # if val == 0      
+        and a1,a1,a4    # trs[pos] = 0      
+        and a0,a0,a4      
+        j m_end           
+m_p:    or a1,a1,a4     # trs[pos] = +1      
+        or a0,a0,a4                 
+        j m_end
+m_m:    or a0,a0,a4                         
+        not a4,a4         
+        and a1,a1,a4    # trs[pos] = -1      
 m_end:
 .end_macro
