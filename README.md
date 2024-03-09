@@ -115,7 +115,6 @@ SUM_HALF_t tests(...) :
 
 ```
  TRS_t tests(...) :
- TRS_t tests(...) :
  a0=0xAAAA, a1=0xBBBB; clean_trs(a0,a1)->0 0
  ts1=0x1, ts0=0x1,pos=0; get_trit(ts1,ts0,pos)->1
  ts1=0x0, ts0=0x1,pos=0; get_trit(ts1,ts0,pos)->-1
