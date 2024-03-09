@@ -1,5 +1,8 @@
 # Changelog
 
+## 09.03.2024 ver.0.10
+   - [Х] shift_trs_t11(ts1,ts0,shift)
+
 ## 06.03.2024 ver.0.08
  -[X] Добавить макросы операции над трайтами TRS_t.
       - [Х] set_trit(ts1,ts0,pos,val)

@@ -4,7 +4,7 @@
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
 # Create date: 03.03.2024
-# Edit date:   06.03.2024
+# Edit date:   09.03.2024
 #
 # Author:      Vladimir V.
 # E-mail:      askfind@ya.ru
@@ -155,7 +155,36 @@ set_trit_t10:
         mv a0,a1
         logi
         loglf
+#
+.data
+shift_trs_t11:
+.string	"ts1=0x0080, ts0=0x0080, shift=+2; shift_trs(ts1,ts0, shift)->"
+.text
+        logs(shift_trs_t11)
+        li a1,0x0080
+        li a0,0x0080
+        li a2,2        
+        shift_trs(a0,a1,a2)
+        logi
+        mv a0,a1
+        logi
+        loglf
 
-#        
+#
+.data
+shift_trs_t12:
+.string	"ts1=0x0080, ts0=0x0080, shift=-3; shift_trs(ts1,ts0, shift)->"
+.text
+        logs(shift_trs_t12)
+        li a1,0x0080
+        li a0,0x0080
+        li a2,-3        
+        shift_trs(a0,a1,a2)
+        logi
+        mv a0,a1
+        logi
+        loglf
+
+# --------
 .end_macro
 
