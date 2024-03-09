@@ -212,27 +212,26 @@ m_end:
         mv a0,$ts0         # a0=ts0
         mv a2,$pos1
         mv a3,$pos2
+                           # проверить параметры              
         bgt a3,a2,m_end    # if a3 > a2 goto m_end
-        
-        li  a4,31         
+        li  a4,31          
         bgt a2,a4,m_clr    # if a2 > 31  goto m_end
-        li  a4,-31         
-        blt a2,a4,m_clr # if a2 < -31  goto m_end      
+        bgt a3,a4,m_clr    # if a2 > 31  goto m_end
+        bltz a2,m_clr      # if a2 <  0  goto m_end
+        bltz a3,m_clr      # if a2 <  0  goto m_end
 
-        sub a4,a2-a3       # len = pos1-pos2      
-        li  a5,0xFFFFFFFF
-        srl a5,a5,a4
-        not a5,a5          # mask ts[31,pos1+1]
-        srl a1,a1,a4
-        and a1,a1,a5      
-        srl a0,a0,a4
-        and a0,a0,a5
+        sub a4,a2,a3       # len = pos1-pos2      
+        li  a5,0xFFFFFFFF  # mask  
+        srl a5,a5,a4       # mask >>= len        
+        srl a1,a1,a4       # tryte.1 >>= len     
+        and a1,a1,a5       # tryte.1 &= mask
+        srl a0,a0,a4       # tryte.0 >>= len     
+        and a0,a0,a5       # tryte.0 &= mask
         j m_end             
-m_clr:  mv a1,zero
-        mv a0,zero
+m_clr:  nop
+        nop
 m_end:      
 .end_macro
-
 
 # ---------------------------------------------------------------
 #
@@ -258,21 +257,21 @@ m_end:
 
 m_loop:
                                  # параметры для вызова макроса     
-        mv a1,t1                 # tmp1.1 = tryte1.1  
-        mv a0,t0                 # tmp1.0 = tryte1.0  
-        mv a3,t6                 # pos
+        mv a1,t1                 # tmp.1 = tryte1.1  
+        mv a0,t0                 # tmp.0 = tryte1.0  
+        mv a3,s1                 # pos
         get_trit(a1,a0,a4)       # a0 = get_trit(...)  
         mv s2,a0                 # store trit tryte1[pos]
         
-        mv a1,t3                 # tmp1.1 = tryte2.1  
-        mv a0,t2                 # tmp1.0 = tryte2.0  
+        mv a1,t3                 # tmp.1 = tryte2.1  
+        mv a0,t2                 # tmp.0 = tryte2.0  
         mv a3,s1                 # pos = i
         get_trit(a1,a0,a3)       # get_trit(...)  
-        mv s1,a0                 # store trit tryte2[pos]
+        mv s3,a0                 # store trit tryte2[pos]
 
         mv a0,s2                 # trit1
         mv a1,s3                 # trit2        
-        and_t(a0,a1,a2)                 
+        and_t(a0,a1)                         
         mv a3,a0                 # store trit to a3
 
         mv a1,t5                 # set trit to tryte3[i]
@@ -284,7 +283,7 @@ m_loop:
         
         addi s1,s1,1             # i = i - 1
         li a0,31                 
-        blez s1,a0,m_loop           # if i <= 0  goto m_loop     
+        ble s1,a0,m_loop       # if i <= 31  goto m_loop     
 
         mv a1,t5                 # return tryte3
         mv a0,t4                 #                
@@ -305,7 +304,7 @@ m_end:
 #
 # trs_t or_trs(trs_t a, trs_t b);
 #
-.macro and_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)
+.macro or_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)
         
         mv t1,$tryte1_1          # t1=tryte1.1  
         mv t0,$tryte1_0          # t0=tryte1.0  
@@ -326,11 +325,11 @@ m_loop:
         mv a0,t2                 # tmp1.0 = tryte2.0  
         mv a3,s1                 # pos = i
         get_trit(a1,a0,a3)       # get_trit(...)  
-        mv s1,a0                 # store trit tryte2[pos]
+        mv s3,a0                 # store trit tryte2[pos]
 
         mv a0,s2                 # trit1
         mv a1,s3                 # trit2        
-        or_t(a0,a1,a2)                 
+        or_t(a0,a1)                 
         mv a3,a0                 # store trit to a3
 
         mv a1,t5                 # set trit to tryte3[i]
@@ -342,7 +341,7 @@ m_loop:
         
         addi s1,s1,1             # i = i - 1
         li a0,31                 
-        blez s1,a0,m_loop           # if i <= 0  goto m_loop     
+        ble s1,a0,m_loop           # if i <= 0  goto m_loop     
 
         mv a1,t5                 # return tryte3
         mv a0,t4                 #                
@@ -384,11 +383,11 @@ m_loop:
         mv a0,t2                 # tmp1.0 = tryte2.0  
         mv a3,s1                 # pos = i
         get_trit(a1,a0,a3)       # get_trit(...)  
-        mv s1,a0                 # store trit tryte2[pos]
+        mv s3,a0                 # store trit tryte2[pos]
 
         mv a0,s2                 # trit1
         mv a1,s3                 # trit2        
-        xor_t(a0,a1,a2)                 
+        xor_t(a0,a1)                 
         mv a3,a0                 # store trit to a3
 
         mv a1,t5                 # set trit to tryte3[i]
@@ -400,7 +399,7 @@ m_loop:
         
         addi s1,s1,1             # i = i - 1
         li a0,31                 
-        blez s1,a0,m_loop           # if i <= 0  goto m_loop     
+        ble s1,a0,m_loop         # if i <= 0  goto m_loop     
 
         mv a1,t5                 # return tryte3
         mv a0,t4                 #                
@@ -443,7 +442,7 @@ m_loop:
         mv a0,t2                 # tmp1.0 = tryte2.0  
         mv a3,s1                 # pos = i
         get_trit(a1,a0,a3)       # get_trit(...)  
-        mv s1,a0                 # store trit tryte2[pos]
+        mv s3,a0                 # store trit tryte2[pos]
 
         mv a0,s2                 # trit1
         mv a1,s3                 # trit2
@@ -506,7 +505,7 @@ m_loop:
         mv a0,t2                 # tmp1.0 = tryte2.0  
         mv a3,s1                 # pos = i
         get_trit(a1,a0,a3)       # get_trit(...)  
-        mv s1,a0                 # store trit tryte2[pos]
+        mv s3,a0                 # store trit tryte2[pos]
 
         mv a0,s2                 # trit1
         mv a1,s3                 # trit2
@@ -557,7 +556,7 @@ m_end:
         mv a0,t2                 #          
         li a2,0                  # pos=0
         li a3,1                  # set trit=1 to tryte2
-        set_trit(a1,a02,a3)    # 
+        set_trit(a1,a2,a3)    # 
         mv t3,a1                 # store tryte2
         mv t2,a0                 #          
 

@@ -1,6 +1,13 @@
 # Changelog
 
 
+## 09.03.2024 ver.0.11
+   - [Х] slice_trs ($ts1,$ts0,$pos1,$pos2)
+   - [Х] and_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)
+   - [Х] or_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)
+   - [Х] xor_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)
+   - [Х] not_trs ($tryte1_1,$tryte1_0)
+
 ## 09.03.2024 ver.0.10
    - [Х] shift_trs_t11(ts1,ts0,shift)
 

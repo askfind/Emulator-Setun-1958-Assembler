@@ -66,16 +66,16 @@ tab_6_9:.byte  1
 
 # Операция троичное AND
 .macro and_t ($a, $b)	
-	li a1,$a	# a1 = a
-	li a2,$b 	# a2 = b
-	addi a1,a1,1	# i = a+1 
+	mv a1,$a	#
+	mv a2,$b 	#
+	addi a1,a1,1	# i = a+1
 	addi a2,a2,1    # j = b+1	
-	li   a3,3	# a3 = 3	
+	li   a3,3	# a3 = 3
 	mul  a4,a1,a3   # a4 = i*3
 	add  a3,a2,a4   # ind = j + i*3
-	la   a4,tab_6   # a4 = tab_6 
-	add  a4,a4,a3   # ind = tab_6 + inds 
-	lb   a0,0(a4)   # a0 = tab_6[ind]
+	la   a4,tab_6   # a4 = tab_6
+	add  a4,a4,a3   # ind = tab_6 + inds
+	lb   a0,0(a4)   # a0 = tab_6[ind]	
 .end_macro
 
 # Таб.8 Троичное исключающее или
@@ -105,8 +105,8 @@ tab_8_9:.byte -1
 
 # Операция троичное XOR
 .macro xor_t ($a, $b)	
-	li a1,$a	# a1 = a
-	li a2,$b 	# a2 = b
+	mv a1,$a	# a1 = a
+	mv a2,$b 	# a2 = b
 	addi a1,a1,1	# i = a+1 
 	addi a2,a2,1    # j = b+1	
 	li   a3,3	# a3 = 3	
@@ -145,8 +145,8 @@ tab_7_9:.byte  1
 
 # Операция троичное OR
 .macro or_t ($a, $b)	
-	li a1,$a	# a1 = a
-	li a2,$b 	# a2 = b
+	mv a1,$a	# a1 = a
+	mv a2,$b 	# a2 = b
 	addi a1,a1,1	# i = a+1 
 	addi a2,a2,1    # j = b+1	
 	li   a3,3	# a3 = 3	
@@ -170,17 +170,17 @@ tab_7_9:.byte  1
 #  - [ ] исправить вывод в 9-ном виде.
 # Операция троичное NOT
 .macro not_t ($a)
-	li a0,$a	
+	mv a0,$a	
 	bgtz a0, m_m	# +1 -> -1 
 	bltz a0, m_p	# -1 -> +1 
 	mv a0,zero	#  0 ->  0
 	j m_end
 m_m:	li a0,-1
 	j m_end
-m_p:	li a0, 1
+m_p:	
+	li a0, 1
 m_end:	
 .end_macro
-
 
 # Таб.2 Полусумматор тритов
 # .------------------------.
@@ -208,8 +208,8 @@ tab_2_9:.byte -1
 
 # Полусумматор тритов
 .macro sum_half_t ($a, $b)	
-	li a1,$a	# a1 = a
-	li a2,$b 	# a2 = b
+	mv a1,$a	# a1 = a
+	mv a2,$b 	# a2 = b
 	addi a1,a1,1	# i = a+1 
 	addi a2,a2,1    # j = b+1	
 	li   a3,3	# a3 = 3	
@@ -296,9 +296,9 @@ tab_3_27:.byte  0,  1
 # Полный смматор тритов
 .macro sum_t ($a, $b, $p0)
 	
-	li a1,$a	    # a1 = a
-	li a2,$b 	    # a2 = b
-	li a2,$p0 	    # a3 = p0
+	mv a1,$a	    # a1 = a
+	mv a2,$b 	    # a2 = b
+	mv a2,$p0 	    # a3 = p0
 	addi a1,a1,1	# i = a+1 
 	addi a2,a2,1    # j = b+1	
 	addi a3,a3,1    # k = p2+1	

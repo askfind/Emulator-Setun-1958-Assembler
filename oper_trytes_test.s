@@ -169,7 +169,6 @@ shift_trs_t11:
         mv a0,a1
         logi
         loglf
-
 #
 .data
 shift_trs_t12:
@@ -180,6 +179,111 @@ shift_trs_t12:
         li a0,0x0080
         li a2,-3        
         shift_trs(a0,a1,a2)
+        logi
+        mv a0,a1
+        logi
+        loglf
+#
+.data
+slice_trs_t13:
+.string	"ts1=0x0100, ts0=0x0100, pos1=8,pos2=4;  slice_trs ($ts1,$ts0,$pos1,$pos2)->"
+.text
+        logs(slice_trs_t13)
+        li a1,0x0100
+        li a0,0x0100
+        li a2,8
+        li a3,4        
+        slice_trs(a0,a1,a2,a3)
+        logi
+        mv a0,a1
+        logi
+        loglf
+#
+.data
+and_trs_t14:
+.string	"tryte1.1=0xFF00, tryte1.0=0xFFFF, tryte2.1=0x00FF, tryte2.0=0xFFFF;  and_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->"
+.text
+        logs(and_trs_t14)
+        li a1,0xFF00
+        li a0,0xFFFF
+        li a3,0x00FF
+        li a2,0xFFFF
+        and_trs(a0,a1,a2,a3)
+        logi
+        mv a0,a1
+        logi
+        loglf
+#
+.data
+and_trs_t15:
+.string	"tryte1.1=0xFF00, tryte1.0=0xFFFF, tryte2.1=0x0000, tryte2.0=0x0000;  and_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->"
+.text
+        logs(and_trs_t15)
+        li a1,0xFF00
+        li a0,0xFFFF
+        li a3,0x0000
+        li a2,0x0000
+        and_trs(a0,a1,a2,a3)
+        logi
+        mv a0,a1
+        logi
+        loglf
+#
+.data
+or_trs_t16:
+.string	"tryte1.1=0xFF00, tryte1.0=0xFFFF, tryte2.1=0x00FF, tryte2.0=0xFFFF;  or_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->"
+.text
+        logs(or_trs_t16)
+        li a1,0xFF00
+        li a0,0xFFFF
+        li a3,0x00FF
+        li a2,0xFF00
+        or_trs(a0,a1,a2,a3)
+        logi
+        mv a0,a1
+        logi
+        loglf
+#
+.data
+or_trs_t17:
+.string	"tryte1.1=0xFF00, tryte1.0=0xFFFF, tryte2.1=0x0000, tryte2.0=0x0000;  or_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->"
+.text
+        logs(or_trs_t17)
+        li a1,0xFF00
+        li a0,0xFFFF
+        li a3,0x0000
+        li a2,0x0000
+        or_trs(a0,a1,a2,a3)
+        logi
+        mv a0,a1
+        logi
+        loglf
+#
+.data
+xor_trs_t18:
+.string	"tryte1.1=0xFF00, tryte1.0=0xFFFF, tryte2.1=0x00FF, tryte2.0=0xFFFF;  xor_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->"
+.text
+        logs(xor_trs_t18)
+        li a1,0xFF00
+        li a0,0xFFFF
+        li a3,0x00FF
+        li a2,0xFF00
+        xor_trs(a0,a1,a2,a3)
+        logi
+        mv a0,a1
+        logi
+        loglf
+#
+.data
+xor_trs_t19:
+.string	"tryte1.1=0xFF00, tryte1.0=0xFFFF, tryte2.1=0x0000, tryte2.0=0x0000;  xor_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->"
+.text
+        logs(xor_trs_t19)
+        li a1,0xFF00
+        li a0,0xFFFF
+        li a3,0x0000
+        li a2,0x0000
+        xor_trs(a0,a1,a2,a3)
         logi
         mv a0,a1
         logi
