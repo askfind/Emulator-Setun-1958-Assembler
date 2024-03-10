@@ -9,7 +9,7 @@ A virtual machine of ternary computer Setun, also known as "Small Automatic Digi
 
 - Дата создания:            02.03.2024
 - Дата редактирования:      10.03.2024
-- Версия:                   0.12
+- Версия:                   0.13
 - Автор:                    Vladimir V.
 - E-mail:                   askfind@ya.ru
 
@@ -40,24 +40,24 @@ AND_t tests(...) :
  and_t(-1,-1)->-1
  and_t(-1,0)->-1
  and_t(-1,1)->-1
- and_t(0,-1)->-1
+ and_t(0,-1)->0
  and_t(0,0)->0
  and_t(0,1)->0
- and_t(1,-1)->-1
- and_t(1,0)->0
+ and_t(1,-1)->1
+ and_t(1,0)->1
  and_t(1,1)->1
 ```
 
 ### 3.2. Троичная операция OR для тритов
 
 ```
-OR_t tests(...) :
+ OR_t tests(...) :
  or_t(-1,-1)->-1
- or_t(-1,0)->0
- or_t(-1,1)->1
+ or_t(-1,0)->-1
+ or_t(-1,1)->-1
  or_t(0,-1)->0
  or_t(0,0)->0
- or_t(0,1)->1
+ or_t(0,1)->0
  or_t(1,-1)->1
  or_t(1,0)->1
  or_t(1,1)->1
@@ -68,13 +68,13 @@ OR_t tests(...) :
 ```
  XOR_t tests(...) :
  xor_t(-1,-1)->-1
- xor_t(-1,0)->0
- xor_t(-1,1)->1
+ xor_t(-1,0)->-1
+ xor_t(-1,1)->-1
  xor_t(0,-1)->0
  xor_t(0,0)->0
  xor_t(0,1)->0
- xor_t(1,-1)->1
- xor_t(1,0)->0
+ xor_t(1,-1)->-1
+ xor_t(1,0)->-1
  xor_t(1,1)->-1
 ```
 
@@ -90,7 +90,7 @@ OR_t tests(...) :
 ### 3.5. Троичная операция SUM_HALF полусумматор для тритов
 
 ```
-SUM_HALF_t tests(...) :
+ SUM_HALF_t tests(...) :
  sum_half_t(-1,-1)->1
  sum_half_t(-1,0)->-1
  sum_half_t(-1,1)->0
@@ -107,41 +107,93 @@ SUM_HALF_t tests(...) :
 ```
  SUM_t_tests(...) :
  sum_t(-1,-1,-1)->0 -1
- sum_t(-1,-1,0)->0 0
+ sum_t(-1,-1,0)->1 -1
  sum_t(1,1,0)->-1 1
  sum_t(1,1,1)->0 1
 ```
+
 ### 3.7. Операции над троичными числами TRS_t
 
+### 3.7.1. Операция над троичными числами clean_trs
+
 ```
-TRS_t tests(...) :
  a0=0xAAAA, a1=0xBBBB; clean_trs(a0,a1)->0 0
+```
+
+### 3.7.2. Операция над троичными числами get_trit
+```
  ts1=0x1, ts0=0x1,pos=0; get_trit(ts1,ts0,pos)->1
  ts1=0x0, ts0=0x1,pos=0; get_trit(ts1,ts0,pos)->-1
  ts1=0x0, ts0=0x0,pos=0; get_trit(ts1,ts0,pos)->0
  ts1=0x4, ts0=0x4,pos=2; get_trit(ts1,ts0,pos)->1
  ts1=0x0, ts0=0x4,pos=2; get_trit(ts1,ts0,pos)->-1
  ts1=0x0, ts0=0x0,pos=2; get_trit(ts1,ts0,pos)->0
+
+```
+
+### 3.7.3. Операция над троичными числами set_trit
+```
  ts1=0x0000, ts0=0x0000, pos=5, val=-1; set_trit(ts1,ts0,pos,val)->32 0
  ts1=0x0000, ts0=0x0000, pos=5, val=0; set_trit(ts1,ts0,pos,val)->0 0
  ts1=0x0000, ts0=0x0000, pos=5, val=+1; set_trit(ts1,ts0,pos,val)->32 32
+```
+
+### 3.7.4. Операция над троичными числами shift_trs
+```
  ts1=0x0080, ts0=0x0080, shift=+2; shift_trs(ts1,ts0, shift)->128 128
  ts1=0x0080, ts0=0x0080, shift=-3; shift_trs(ts1,ts0, shift)->16 16
+```
+
+### 3.7.5. Операция над троичными числами slice_trs
+```
  ts1=0x0100, ts0=0x0100, pos1=8,pos2=4;  slice_trs ($ts1,$ts0,$pos1,$pos2)->16 16
+```
+
+### 3.7.6. Операция над троичными числами and_trs
+```
  tryte1.1=0xFF00, tryte1.0=0xFFFF, tryte2.1=0x00FF, tryte2.0=0xFFFF;  and_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->32 32
  tryte1.1=0xFF00, tryte1.0=0xFFFF, tryte2.1=0x0000, tryte2.0=0x0000;  and_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->32 32
+```
+
+### 3.7.7. Операция над троичными числами or_trs
+```
  tryte1.1=0xFF00, tryte1.0=0xFFFF, tryte2.1=0x00FF, tryte2.0=0xFFFF;  or_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->32 32
  tryte1.1=0xFF00, tryte1.0=0xFFFF, tryte2.1=0x0000, tryte2.0=0x0000;  or_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->32 32
+```
+
+### 3.7.8. Операция над троичными числами xor_trs
+```
  tryte1.1=0xFF00, tryte1.0=0xFFFF, tryte2.1=0x00FF, tryte2.0=0xFFFF;  xor_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->32 0
  tryte1.1=0xFF00, tryte1.0=0xFFFF, tryte2.1=0x0000, tryte2.0=0x0000;  xor_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->32 0
+```
+
+### 3.7.9. Операция над троичными числами not_trs
+```
  tryte1.1=0x0000, tryte1.0=0x00FF;  not_trs ($tryte1_1,$tryte1_0)->255 -1
- tryte1.1=0x0001, tryte1.0=0x0001, tryte2.1=0x0001, tryte2.0=0x0001;  add_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->3 2
- tryte1.1=0x0000, tryte1.0=0x0001, tryte2.1=0x0000, tryte2.0=0x0001;  add_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->1 1
+```
+
+### 3.7.10. Операция над троичными числами add_trs
+```
+tryte1.1=0x0001, tryte1.0=0x0001, tryte2.1=0x0001, tryte2.0=0x0001;  add_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->3 2
+tryte1.1=0x0000, tryte1.0=0x0001, tryte2.1=0x0000, tryte2.0=0x0001;  add_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->3 1
+```
+
+### 3.7.11. Операция над троичными числами sub_trs
+```
  tryte1.1=0x0002, tryte1.0=0x0002, tryte2.1=0x0001, tryte2.0=0x0001;  sub_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->3 0
  tryte1.1=0x0000, tryte1.0=0x0001, tryte2.1=0x0000, tryte2.0=0x0001;  sub_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->0 0
- tryte1.1=0x0000, tryte1.0=0x0001, tryte2.1=0x0000, tryte2.0=0x0001;  sub_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->1 1
- tryte1.1=0x0000, tryte1.0=0x0001, tryte2.1=0x0000, tryte2.0=0x0001;  sub_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->1 0
- ```
+```
+
+### 3.7.12. Операция над троичными числами inc_trs
+```
+ tryte1.1=0x0004, tryte1.0=0x0004;  inc_trs ($tryte1_1,$tryte1_0)->5 1
+```
+
+### 3.7.13. Операция над троичными числами dec_trs
+```
+ tryte1.1=0x0004, tryte1.0=0x0004;  dec_trs ($tryte1_1,$tryte1_0)->5 0
+```
+
 
 # Ссылки
 

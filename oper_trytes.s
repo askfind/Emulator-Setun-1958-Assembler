@@ -449,15 +449,15 @@ m_end:
         
         li s1,0                  # i=0 счетчик номера трита
         li s4,0                  # p=0 перенос при сложении тритов
-
+	
 m_loop:
-                                 # параметры для вызова макроса     
+                                 # параметры для вызова макроса             
         mv a1,t1                 # tmp1.1 = tryte1.1  
         mv a0,t0                 # tmp1.0 = tryte1.0  
         mv a3,s1                 # pos
         get_trit(a1,a0,a3)       # a0 = get_trit(...)  
         mv s2,a0                 # store trit tryte1[pos]
-        
+       	
         mv a1,t3                 # tmp1.1 = tryte2.1  
         mv a0,t2                 # tmp1.0 = tryte2.0  
         mv a3,s1                 # pos = i
@@ -470,7 +470,7 @@ m_loop:
         sum_t(a0,a1,a2)         
         mv s4,a1                 # store p 
         mv a3,a0                 # store trit to a3
-
+	
         mv a1,t5                 # set trit to tryte3[i]
         mv a0,t4                 #          
         mv a2,s1                 #
@@ -481,11 +481,12 @@ m_loop:
         addi s1,s1,1             # i = i - 1
         li a0,31                 # len max
         ble s1,a0,m_loop         # if i <= 31  goto m_loop     
-
+        
         mv a1,t5                 # return tryte3
         mv a0,t4                 #        
         mv a2,s4                 # return p перенос при переполнении       
-m_end:      
+m_end:     
+	 
 .end_macro
 
 # ---------------------------------------------------------------
@@ -576,7 +577,7 @@ m_end:
         mv a0,t2                 #          
         li a2,0                  # pos=0
         li a3,1                  # set trit=1 to tryte2
-        set_trit(a0,a1,a2,a3)    # 
+        set_trit(a1,a0,a2,a3)    # 
         mv t3,a1                 # store tryte2
         mv t2,a0                 #          
 
@@ -587,8 +588,8 @@ m_loop:
                                  # параметры для вызова макроса     
         mv a1,t1                 # tmp1.1 = tryte1.1  
         mv a0,t0                 # tmp1.0 = tryte1.0  
-        mv a3,t6                 # pos
-        get_trit(a1,a0,a4)       # a0 = get_trit(...)  
+        mv a3,s1                 # pos
+        get_trit(a1,a0,a3)       # a0 = get_trit(...)  
         mv s2,a0                 # store trit tryte1[pos]
         
         mv a1,t3                 # tmp1.1 = tryte2.1  
@@ -645,7 +646,7 @@ m_end:
         mv a0,t2                 #          
         li a2,0                  # pos=0
         li a3,-1                  # set trit=-1 to tryte2
-        set_trit(a0,a1,a2,a3)    # 
+        set_trit(a1,a0,a2,a3)    # 
         mv t3,a1                 # store tryte2
         mv t2,a0                 #          
 
@@ -656,8 +657,8 @@ m_loop:
                                  # параметры для вызова макроса     
         mv a1,t1                 # tmp1.1 = tryte1.1  
         mv a0,t0                 # tmp1.0 = tryte1.0  
-        mv a3,t6                 # pos
-        get_trit(a1,a0,a4)       # a0 = get_trit(...)  
+        mv a3,s1                 # pos
+        get_trit(a1,a0,a3)       # a0 = get_trit(...)  
         mv s2,a0                 # store trit tryte1[pos]
         
         mv a1,t3                 # tmp1.1 = tryte2.1  

@@ -1,14 +1,23 @@
 # Changelog
 
+## 10.03.2024 ver.0.13
+    -[X] FIX ERROR  sum_t(...)
+    -[X] FIX ERROR  add_trs(...)
+    -[X] FIX ERROR  sub_trs(...)
+    -[X] FIX ERROR  inc_trs(...)
+    -[X] FIX ERROR  dec_trs(...)
+
+    -[Х] TEST Ok'
+
 ## 10.03.2024 ver.0.12
    -[Х] FIX ERROR операция с тритами sum_t.
    -[Х] FIX ERROR операция с тритами sum_half_t.
    -[Х] Добавлен операции над трайтами add_trs, sub_trs, inc_trs, dec_trs.
    -[Х] TEST:
-    -[ ] ERROR  add_trs(...)
-    -[ ] ERROR  sub_trs(...)
-    -[ ] ERROR  inc_trs(...)
-    -[ ] ERROR  dec_trs(...)
+    -[X] ERROR  add_trs(...)
+    -[X] ERROR  sub_trs(...)
+    -[X] ERROR  inc_trs(...)
+    -[X ] ERROR  dec_trs(...)
 
 ## 09.03.2024 ver.0.11
    - [Х] slice_trs ($ts1,$ts0,$pos1,$pos2)

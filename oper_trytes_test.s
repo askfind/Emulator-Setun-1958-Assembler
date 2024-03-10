@@ -367,10 +367,10 @@ sub_trs_t24:
 
 #
 .data
-inc_trs_t24:
+inc_trs_t25:
 .string	"tryte1.1=0x0004, tryte1.0=0x0004;  inc_trs ($tryte1_1,$tryte1_0)->"
 .text
-        logs(sub_trs_t24)
+        logs(inc_trs_t25)
         li a1,0x0004
         li a0,0x0004
         inc_trs(a1,a0)
@@ -381,10 +381,10 @@ inc_trs_t24:
 
 #
 .data
-dec_trs_t24:
-.string	"tryte1.1=0x0002, tryte1.0=0x0002;  inc_trs ($tryte1_1,$tryte1_0)->"
+dec_trs_t26:
+.string	"tryte1.1=0x0004, tryte1.0=0x0004;  dec_trs ($tryte1_1,$tryte1_0)->"
 .text
-        logs(sub_trs_t24)
+        logs(dec_trs_t26)
         li a1,0x0004
         li a0,0x0004
         dec_trs(a1,a0)
