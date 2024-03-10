@@ -1,7 +1,6 @@
 # Changelog
 
-
-## 09.03.2024 ver.0.12
+## 10.03.2024 ver.0.12
    -[Х] FIX ERROR операция с тритами sum_t.
    -[Х] FIX ERROR операция с тритами sum_half_t.
    -[Х] Добавлен операции над трайтами add_trs, sub_trs, inc_trs, dec_trs.
