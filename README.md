@@ -172,23 +172,25 @@ tryte1.1=0x0000, tryte1.0=0x00FF;  not_trs ($tryte1_1,$tryte1_0)->trs : [0000000
 ```
 
 ### 3.7.10. Операция над троичными числами add_trs
+```
  tryte1.1=0x0001, tryte1.0=0x0001, tryte2.1=0x0001, tryte2.0=0x0001;  add_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->trs : [000000000000000000000000000000+-]
- tryte1.1=0x0000, tryte1.0=0x0001, tryte2.1=0x0000, tryte2.0=0x0001;  add_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->trs : [000000000000000000000000000000-+]```
+ tryte1.1=0x0000, tryte1.0=0x0001, tryte2.1=0x0000, tryte2.0=0x0001;  add_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->trs : [000000000000000000000000000000-+]
+```
 
 ### 3.7.11. Операция над троичными числами sub_trs
 ```
- tryte1.1=0x0002, tryte1.0=0x0002, tryte2.1=0x0001, tryte2.0=0x0001;  sub_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->trs : [000000000000000000000000000000--]
+ tryte1.1=0x0002, tryte1.0=0x0002, tryte2.1=0x0001, tryte2.0=0x0001;  sub_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->trs : [000000000000000000000000000000+-]
  tryte1.1=0x0000, tryte1.0=0x0001, tryte2.1=0x0000, tryte2.0=0x0001;  sub_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->trs : [00000000000000000000000000000000]
 ```
 
 ### 3.7.12. Операция над троичными числами inc_trs
 ```
- tryte1.1=0x0004, tryte1.0=0x0004;  inc_trs ($tryte1_1,$tryte1_0)->trs : [00000000000000000000000000000-0+]
+ tryte1.1=0x0004, tryte1.0=0x0004;  inc_trs ($tryte1_1,$tryte1_0)->trs : [00000000000000000000000000000+0+]
 ```
 
 ### 3.7.13. Операция над троичными числами dec_trs
 ```
- tryte1.1=0x0004, tryte1.0=0x0004;  dec_trs ($tryte1_1,$tryte1_0)->trs : [00000000000000000000000000000-0-]
+ tryte1.1=0x0004, tryte1.0=0x0004;  dec_trs ($tryte1_1,$tryte1_0)->trs : [00000000000000000000000000000+0-]
 ```
 
 
