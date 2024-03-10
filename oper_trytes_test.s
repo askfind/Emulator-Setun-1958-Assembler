@@ -4,7 +4,7 @@
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
 # Create date: 03.03.2024
-# Edit date:   09.03.2024
+# Edit date:   10.03.2024
 #
 # Author:      Vladimir V.
 # E-mail:      askfind@ya.ru
@@ -284,6 +284,110 @@ xor_trs_t19:
         li a3,0x0000
         li a2,0x0000
         xor_trs(a0,a1,a2,a3)
+        logi
+        mv a0,a1
+        logi
+        loglf
+#
+.data
+not_trs_t20:
+.string	"tryte1.1=0x0000, tryte1.0=0x00FF;  not_trs ($tryte1_1,$tryte1_0)->"
+.text
+        logs(not_trs_t20)
+        li a1,0x0000
+        li a0,0x00FF
+        not_trs(a1,a0)
+        logi
+        mv a0,a1
+        logi
+        loglf
+
+#
+.data
+add_trs_t21:
+.string	"tryte1.1=0x0001, tryte1.0=0x0001, tryte2.1=0x0001, tryte2.0=0x0001;  add_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->"
+.text
+        logs(add_trs_t21)
+        li a1,0x0001
+        li a0,0x0001
+        li a3,0x0001
+        li a2,0x0001
+        add_trs(a1,a0,a3,a2)
+        logi
+        mv a0,a1
+        logi
+        loglf
+
+#
+.data
+add_trs_t22:
+.string	"tryte1.1=0x0000, tryte1.0=0x0001, tryte2.1=0x0000, tryte2.0=0x0001;  add_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->"
+.text
+        logs(add_trs_t22)
+        li a1,0x0000
+        li a0,0x0001
+        li a3,0x0000
+        li a2,0x0001
+        add_trs(a1,a0,a3,a2)
+        logi
+        mv a0,a1
+        logi
+        loglf
+
+#
+.data
+sub_trs_t23:
+.string	"tryte1.1=0x0002, tryte1.0=0x0002, tryte2.1=0x0001, tryte2.0=0x0001;  sub_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->"
+.text
+        logs(sub_trs_t23)
+        li a1,0x0002
+        li a0,0x0002
+        li a3,0x0001
+        li a2,0x0001
+        sub_trs(a1,a0,a3,a2)
+        logi
+        mv a0,a1
+        logi
+        loglf
+#
+.data
+sub_trs_t24:
+.string	"tryte1.1=0x0000, tryte1.0=0x0001, tryte2.1=0x0000, tryte2.0=0x0001;  sub_trs ($tryte1_1,$tryte1_0,$tryte2_1,$tryte2_0)->"
+.text
+        logs(sub_trs_t24)
+        li a1,0x0000
+        li a0,0x0001
+        li a3,0x0000
+        li a2,0x0001
+        sub_trs(a1,a0,a3,a2)
+        logi
+        mv a0,a1
+        logi
+        loglf
+
+#
+.data
+inc_trs_t24:
+.string	"tryte1.1=0x0004, tryte1.0=0x0004;  inc_trs ($tryte1_1,$tryte1_0)->"
+.text
+        logs(sub_trs_t24)
+        li a1,0x0004
+        li a0,0x0004
+        inc_trs(a1,a0)
+        logi
+        mv a0,a1
+        logi
+        loglf
+
+#
+.data
+dec_trs_t24:
+.string	"tryte1.1=0x0002, tryte1.0=0x0002;  inc_trs ($tryte1_1,$tryte1_0)->"
+.text
+        logs(sub_trs_t24)
+        li a1,0x0004
+        li a0,0x0004
+        dec_trs(a1,a0)
         logi
         mv a0,a1
         logi

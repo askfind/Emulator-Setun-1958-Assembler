@@ -3,8 +3,8 @@
 #
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
-# Create date: 03.03.2024
-# Edit date:   05.03.2024
+# Create date: 03.03.2024fv
+# Edit date:   10.03.2024
 #
 #
 # Author:      Vladimir V.
@@ -192,34 +192,37 @@ m_end:
 # |------------------------|
 # |  1  |  0  |  1  |  +-  |
 # .------------------------.
-
  .data
  .align 4
 tab_2:
-tab_2_1:.byte  1
-tab_2_2:.byte -1
-tab_2_3:.byte  0
-tab_2_4:.byte -1
-tab_2_5:.byte  0
-tab_2_6:.byte  1
-tab_2_7:.byte  0
-tab_2_8:.byte  1
-tab_2_9:.byte -1
+                   # ----------+--------
+                   #  Input    |  Output
+                   #  a   b    |  s
+                   #  ---------+--------
+tab_2_1:.byte  1   # -1  -1 	|  1
+tab_2_2:.byte -1   # -1   0 	| -1
+tab_2_3:.byte  0   # -1   1 	|  0
+tab_2_4:.byte -1   #  0  -1 	| -1
+tab_2_5:.byte  0   #  0   0 	|  0
+tab_2_6:.byte  1   #  0   1 	|  1
+tab_2_7:.byte  0   #  1  -1 	|  0
+tab_2_8:.byte  1   #  1   0 	|  1
+tab_2_9:.byte -1   #  1   1 	| -1
 
 # Полусумматор тритов
 .macro sum_half_t ($a, $b)	
-	mv a1,$a	# a1 = a
-	mv a2,$b 	# a2 = b
-	addi a1,a1,1	# i = a+1 
-	addi a2,a2,1    # j = b+1	
-	li   a3,3	# a3 = 3	
-	mul  a4,a1,a3   # a4 = i*3
-	add  a3,a2,a4   # ind = j + i*3
+	mv a0,$a        # a1 = a
+	mv a1,$b        # a2 = b
+	addi a0,a0,1	# i = a+1 
+	addi a1,a1,1    # j = b+1
+
+	li   a2,3	# a2 = 3
+	mul  a3,a0,a2   # a3 = i*3
+	add  a3,a1,a3   # ind = j + i*3	
 	la   a4,tab_2   # a4 = tab_2 
 	add  a4,a4,a3   # ind = tab_2 + inds 
 	lb   a0,0(a4)   # a0 = tab_2[ind]
 .end_macro
-
 
 
 # Таб.3 Таблица полного сумматора тритов
@@ -230,94 +233,67 @@ tab_2_9:.byte -1
 # | Сумма             0   1  -1   1  -1   0 |
 # | Перенос в n+1    -1  -1   0   0   1   1 |
 # .-----------------------------------------.
-#  Input        |  Output
-#  p0  a   b    |  s  p1   
-#  -------------+--------
-# -1  -1  -1	|  0  -1   
-# -1  -1   0    |  1  -1   
-# -1  -1   1    | -1   0
-# -1   0  -1    |  1  -1     
-# -1   0   0    | -1   0
-# -1   0   1    |  0   0   
-# -1   1  -1    | -1   0  
-# -1   1   0    |  0   0
-# -1   1   1    |  1   0
-#  0  -1  -1    |  1  -1 
-#  0  -1   0    | -1   0
-#  0  -1   1    |  0   0
-#  0   0  -1    |  0  -1 
-#  0   0   0    |  0   0
-#  0   0   1    |  1   0 
-#  0   1  -1    |  0   0 
-#  0   1   0    |  1   0 
-#  0   1   1    | -1   1
-#  1  -1  -1    | -1   0
-#  1  -1   0    |  0   0
-#  1  -1   1    |  1   0
-#  1   0  -1    |  0   0
-#  1   0   0    |  1   0
-#  1   0   1    | -1   1
-#  1   1  -1    |  1   0
-#  1   1   0    | -1   1
-#  1   1   1    |  0   1    
-
  .data
  .align 4
 tab_3:
-tab_3_1:.byte   0, -1
-tab_3_2:.byte   1, -1   
-tab_3_3:.byte  -1,  0  
-tab_3_4:.byte   1, -1     
-tab_3_5:.byte  -1,  0     
-tab_3_6:.byte   0,  0    
-tab_3_7:.byte  -1,  0   
-tab_3_8:.byte   0,  0  
-tab_3_9:.byte   1,  0     
-tab_3_10:.byte  1, -1     
-tab_3_11:.byte -1,  0     
-tab_3_12:.byte  0,  0
-tab_3_13:.byte  0, -1     
-tab_3_14:.byte  0,  0     
-tab_3_15:.byte  1,  0     
-tab_3_16:.byte  0,  0     
-tab_3_17:.byte  1,  0
-tab_3_18:.byte -1,  1
-tab_3_19:.byte -1,  0   
-tab_3_20:.byte  0,  0    
-tab_3_21:.byte  1,  0     
-tab_3_22:.byte  0,  0
-tab_3_23:.byte  1,  0          
-tab_3_24:.byte -1,  1     
-tab_3_25:.byte  1,  0    
-tab_3_26:.byte -1,  1     
-tab_3_27:.byte  0,  1
+                         # -------------+--------
+                         #  Input        |  Output
+                         #  p0  a   b    |  s  p1
+                         #  -------------+--------
+tab_3_1:.byte   0, -1    # -1  -1  -1	 |  0  -1
+tab_3_2:.byte   1, -1    # -1  -1   0    |  1  -1
+tab_3_3:.byte  -1,  0    # -1  -1   1    | -1   0
+tab_3_4:.byte   1, -1    # -1   0  -1    |  1  -1
+tab_3_5:.byte  -1,  0    # -1   0   0    | -1   0
+tab_3_6:.byte   0,  0    # -1   0   1    |  0   0
+tab_3_7:.byte  -1,  0    # -1   1  -1    | -1   0
+tab_3_8:.byte   0,  0    # -1   1   0    |  0   0
+tab_3_9:.byte   1,  0    # -1   1   1    |  1   0
+tab_3_10:.byte  1, -1    #  0  -1  -1    |  1  -1
+tab_3_11:.byte -1,  0    #  0  -1   0    | -1   0
+tab_3_12:.byte  0,  0    #  0  -1   1    |  0   0
+tab_3_13:.byte  0, -1    #  0   0  -1    | -1   0
+tab_3_14:.byte  0,  0    #  0   0   0    |  0   0
+tab_3_15:.byte  1,  0    #  0   0   1    |  1   0
+tab_3_16:.byte  0,  0    #  0   1  -1    |  0   0
+tab_3_17:.byte  1,  0    #  0   1   0    |  1   0
+tab_3_18:.byte -1,  1    #  0   1   1    | -1   1
+tab_3_19:.byte -1,  0    #  1  -1  -1    | -1   0
+tab_3_20:.byte  0,  0    #  1  -1   0    |  0   0
+tab_3_21:.byte  1,  0    #  1  -1   1    |  1   0
+tab_3_22:.byte  0,  0    #  1   0  -1    |  0   0
+tab_3_23:.byte  1,  0    #  1   0   0    |  1   0
+tab_3_24:.byte -1,  1    #  1   0   1    | -1   1
+tab_3_25:.byte  1,  0    #  1   1  -1    |  1   0
+tab_3_26:.byte -1,  1    #  1   1   0    | -1   1
+tab_3_27:.byte  0,  1    #  1   1   1    |  0   1
 
 
 # Полный смматор тритов
 .macro sum_t ($a, $b, $p0)
 	
-	mv a1,$a	    # a1 = a
-	mv a2,$b 	    # a2 = b
-	mv a2,$p0 	    # a3 = p0
-	addi a1,a1,1	# i = a+1 
-	addi a2,a2,1    # j = b+1	
-	addi a3,a3,1    # k = p2+1	
+	mv a0,$a	# a0 = a
+	mv a1,$b 	# a1 = b
+	mv a2,$p0 	# a2 = p0
+	addi a0,a0,1	# i = a+1 
+	addi a1,a1,1    # j = b+1	
+	addi a2,a2,1    # k = p0+1	
 	
-	li   a3,3	    # a3 = 3	
-	mul  a4,a2,a3   # a4 = j*3
+	li   a3,3	# a3 = 3
+	mul  a4,a1,a3   # a4 = j*3
 	
-	li   a3,9	    # a3 = 9	
-	mul  a5,a5,a3   # a4 = k*9
+	li   a3,9	# a4 = 9
+	mul  a5,a0,a3   # a5 = i*9
 
-	add  a3,a1,a4   # ind = i + j*3
-	add  a3,a3,a5   # ind = i + j*3 + k*9
+	add  t1,a4,a5   # indx = i*9 + j*3
+	add  t1,t1,a2   # indx = i*9 + j*3 + k
 	
 	la   a4,tab_3   # a4 = tab_3 
-	li   a5,2		#
-	mul  a3,a3,a5   # ind = (i + j*3 + k*9) * 2
-	add  a4,a4,a3   # ind = tab_3 + inds 
+	li   a5,2	# a5 = 2
+	mul  t1,t1,a5   # indx = (i + j*3 + k*9) * 2
+	add  a4,a4,t1   # indx = tab_3 + inds 
 	
 	lb   a0,0(a4)   # a0 = ss 
-	lb   a1,1(a4)   # a0 = p1
+	lb   a1,1(a4)   # a1 = p1
 
 .end_macro
