@@ -4,7 +4,7 @@
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
 # Create date: 03.03.2024
-# Edit date:   10.03.2024
+# Edit date:   11.03.2024
 #
 # Author:      Vladimir V.
 # E-mail:      askfind@ya.ru
@@ -22,13 +22,14 @@
 .end_macro
 
 .macro logi                 # print integer
-    mv  t0,a0
-    bgez t0,m_p
+    mv  a1,a0
+    bgez a0,m_p
+m_m:    
     li a0,'-'
     li  a7, 11
     ecall
-    not t0,t0
-    addi a0,t0,1    
+    not a0,a1
+    addi a0,a0,1    
 m_p:
     li  a7, 1
     ecall

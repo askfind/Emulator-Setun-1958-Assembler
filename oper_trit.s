@@ -4,7 +4,7 @@
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
 # Create date: 03.03.2024fv
-# Edit date:   10.03.2024
+# Edit date:   11.03.2024
 #
 #
 # Author:      Vladimir V.
@@ -285,13 +285,13 @@ tab_3_27:.byte  0,  1    #  1   1   1    |  0   1
 	li   a3,9	# a4 = 9
 	mul  a5,a0,a3   # a5 = i*9
 
-	add  t1,a4,a5   # indx = i*9 + j*3
-	add  t1,t1,a2   # indx = i*9 + j*3 + k
+	add  a6,a4,a5   # indx = i*9 + j*3
+	add  a6,a6,a2   # indx = i*9 + j*3 + k
 	
 	la   a4,tab_3   # a4 = tab_3 
 	li   a5,2	# a5 = 2
-	mul  t1,t1,a5   # indx = (i + j*3 + k*9) * 2
-	add  a4,a4,t1   # indx = tab_3 + inds 
+	mul  a6,a6,a5   # indx = (i + j*3 + k*9) * 2
+	add  a4,a4,a6   # indx = tab_3 + inds 
 	
 	lb   a0,0(a4)   # a0 = ss 
 	lb   a1,1(a4)   # a1 = p1

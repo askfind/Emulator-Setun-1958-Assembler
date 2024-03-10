@@ -1,5 +1,8 @@
 # Changelog
 
+## 11.03.2024 ver.0.15
+   -[X] FIX ERROR  inc_t(...)
+   -[X] FIX ERROR  dec_t(...)
 
 ## 10.03.2024 ver.0.14
     - [Х] Добавить вывод троичного числа view_trs

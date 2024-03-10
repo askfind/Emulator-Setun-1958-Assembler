@@ -4,7 +4,7 @@
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
 # Create date: 05.03.2024
-# Edit date:   10.03.2024
+# Edit date:   11.03.2024
 #
 #
 # Author:      Vladimir V.
@@ -449,7 +449,7 @@ m_end:
         
         li s1,0                  # i=0 счетчик номера трита
         li s4,0                  # p=0 перенос при сложении тритов
-	
+
 m_loop:
                                  # параметры для вызова макроса             
         mv a1,t1                 # tmp1.1 = tryte1.1  
@@ -463,7 +463,7 @@ m_loop:
         mv a3,s1                 # pos = i
         get_trit(a1,a0,a3)       # get_trit(...)  
         mv s3,a0                 # store trit tryte2[pos]
-
+	
         mv a0,s2                 # trit1
         mv a1,s3                 # trit2
         mv a2,s4                 # p
@@ -486,7 +486,7 @@ m_loop:
         mv a0,t4                 #        
         mv a2,s4                 # return p перенос при переполнении       
 m_end:     
-	 
+
 .end_macro
 
 # ---------------------------------------------------------------
@@ -618,7 +618,7 @@ m_loop:
 
         mv a1,t5                 # return tryte3
         mv a0,t4                 #        
-        mv a2,s3                 # return p перенос при переполнении       
+        mv a2,s4                 # return p перенос при переполнении       
 m_end:      
 .end_macro
 
@@ -687,6 +687,6 @@ m_loop:
 
         mv a1,t5                 # return tryte3
         mv a0,t4                 #        
-        mv a2,s3                 # return p перенос при переполнении       
+        mv a2,s4                 # return p перенос при переполнении       
 m_end:      
 .end_macro

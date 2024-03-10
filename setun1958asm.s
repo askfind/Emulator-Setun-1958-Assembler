@@ -4,9 +4,9 @@
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
 # Create date: 01.03.2024
-# Edit date:   10.03.2024
+# Edit date:   11.03.2024
 #
-# Version:     0.14
+# Version:     0.15
 #
 # Author:      Vladimir V.
 # E-mail:      askfind@ya.ru
@@ -173,6 +173,25 @@ main:
 	trs_t_test      # TRS_t Тестирование операций с троичными числами
 
         setun_trs_test   # SETUN_TRS Тестирование операций с троичными числами
+        li a1,0x0004
+        li a0,0x0004
+        view_trs(a1,a0) # вывод троичного числа
+        li a3,0x0001
+        li a2,0x0001
+        view_trs(a3,a2) # вывод троичного числа
+
+        li a1,0x0004
+        li a0,0x0004
+        li a3,0x0001
+        li a2,0x0001        
+        add_trs(a1,a0,a3,a2)
+        view_trs(a1,a0) # вывод троичного числа
+
+        li a1,0x0004
+        li a0,0x0004
+        li a3,0x0001
+        li a2,0x0001        
+        sub_trs(a1,a0,a3,a2)
         view_trs(a1,a0) # вывод троичного числа
 
 # ------------------------------------------
