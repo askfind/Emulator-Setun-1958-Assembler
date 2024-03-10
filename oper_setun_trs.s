@@ -1,18 +1,24 @@
 #
-# Filename: "setun1958asm.s"
+# Filename: "oper_setun_trs.s"
 #
 # Project: Троичная МЦВМ "Сетунь" 1958 года на языке ассемблера RISC-V
 #
-# Create date: 01.03.2024
+# Create date: 10.03.2024
 # Edit date:   10.03.2024
 #
-# Version:     0.14
 #
 # Author:      Vladimir V.
 # E-mail:      askfind@ya.ru
 #
 # GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
 #
+
+
+# TODO  ++++++++++++++++++++++++++++++++++++++++
+# Добавить операции для троичных чисел из тритов
+# trs_t mul_trs(trs_t a, trs_t b);
+# trs_t div_trs(trs_t a, trs_t b);
+# void mod_3_n(trs_t *t, uint8_t n);
 
 #
 #  Использование ресурсов RISC-V для "Сетунь-1958"
@@ -126,64 +132,8 @@
 #   trit = {-1,0,1}  - трит значения трита
 #
 # -----------------------------------------------------
-#   Операции с тритами 
-#
-
-.include "logging.s"  # файл с макросами вывода сообщений и отладчоной информации
-.include "oper_trit.s"  	 # файл с макросами операций над тритами
-.include "oper_trit_test.s" 	 # файл с макросами тестирование операций над тритами
-.include "oper_trytes.s"  	 # файл с макросами операций над тритами
-.include "oper_trytes_test.s" 	 # файл с макросами тестирование операций над тритами
-.include "oper_setun_trs.s"  	 # файл с макросами операций Setun-1958
-.include "oper_setun_trs_test.s" # файл с макросами тестирование операций Setun-1958
-
-# ---------------------------------------
-# Работа троичной МЦВМ 'Сетунь' 1958 года
-#
-.globl  main
-
-.data
-project: # Название проекта
-.string "Ternary small digital computer 'Setun' on RISC-V\n"
-begin_emu:
-.string "\nBegin emulator 'Setun-1958'\n"
-end_emu:
-.string "\nEnd emulator 'Setun-1958'\n"
 
 
-# ------------------------------------------
-# Стартовая точка входа
-# ------------------------------------------
-.text
-main:
-	puts (project) # Сообщение о проекте
-
-# ------------------------------------------
-# Тест фрагмента на ассемблера
-
-# ------------------------------------------
-# Запуск тестов
-
-	and_t_test     	# AND_t Тестирование операция над тритами
-	or_t_test      	# OR_t: Тестирование операция над тритами
-	xor_t_test     	# XOR_t: Тестирование операция над тритами
-	not_t_test     	# XOR_t: Тестирование операция над тритами
-	sum_half_t_test # SUM_HALF_t Тестирование операция над тритами
-	sum_t_test      # SUM_t Тестирование операция над тритами
-	trs_t_test      # TRS_t Тестирование операций с троичными числами
-
-        setun_trs_test   # SETUN_TRS Тестирование операций с троичными числами
-        view_trs(a1,a0) # вывод троичного числа
-
-# ------------------------------------------
-# Запуск эмулятора 'СЕТУНЬ'        
-
-	puts (begin_emu) #
-        setun_reset   	 # Сброс эмулятор setun1958asm
-	puts (end_emu)   #	
-
-
-success:
-	li a0, 42
-	li a7, 93
-	ecall
+.macro setun_reset           # Сброс машины
+       #TODO добавить код
+.end_macro
